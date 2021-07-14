@@ -32,6 +32,7 @@ import {
 import HomeScreen from './src/screens/Home/';
 import Posts from './src/components/posts/index.js';
 import Profile from './src/screens/Profile/ProfileScreen.js';
+import SearchResult from './src/screens/SearchResults/index.js';
 
 
 
@@ -72,7 +73,8 @@ const App: () => Node = () => {
     <SafeAreaView style={backgroundStyle}>
       {/* <Posts /> */}
       {/* <HomeScreen /> */}
-      <Profile />
+      {/* <Profile /> */}
+      <SearchResult />
       {/* <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"
