@@ -32,35 +32,10 @@ import {
 import HomeScreen from './src/screens/Home/';
 import Posts from './src/components/posts/index.js';
 import Profile from './src/screens/Profile/ProfileScreen.js';
-import SearchResult from './src/screens/SearchResults/index.js';
+import SearchResultScreen from './src/screens/SearchResults/index.js';
+import DestinationSearch from './src/screens/DestinationSearch/index.js';
 
 
-
-const Section = ({children, title}): Node => {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
-};
 
 const App: () => Node = () => {
   const isDarkMode = useColorScheme() === 'dark';
@@ -70,13 +45,17 @@ const App: () => Node = () => {
   };
 
   return (
+    <>
+    <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
     <SafeAreaView style={backgroundStyle}>
       {/* <Posts /> */}
       {/* <HomeScreen /> */}
       {/* <Profile /> */}
-      <SearchResult />
-      {/* <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <ScrollView
+      {/* <SearchResultScreen /> */}
+      <DestinationSearch />
+
+
+      {/* <ScrollView
         contentInsetAdjustmentBehavior="automatic"
         style={backgroundStyle}>
         <Header />
@@ -100,8 +79,9 @@ const App: () => Node = () => {
           </Section>
           <LearnMoreLinks />
         </View>
-      </ScrollView> */}
+      </ScrollView>  */}
     </SafeAreaView>
+    </>
   );
 };
 
