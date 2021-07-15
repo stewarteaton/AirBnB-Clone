@@ -34,6 +34,8 @@ import Posts from './src/components/posts/index.js';
 import Profile from './src/screens/Profile/ProfileScreen.js';
 import SearchResultScreen from './src/screens/SearchResults/index.js';
 import DestinationSearch from './src/screens/DestinationSearch/index.js';
+import Guests from './src/screens/Guests/index.js';
+
 
 
 
@@ -52,7 +54,9 @@ const App: () => Node = () => {
       {/* <HomeScreen /> */}
       {/* <Profile /> */}
       {/* <SearchResultScreen /> */}
-      <DestinationSearch />
+      {/* <DestinationSearch /> */}
+      <Guests />
+
 
 
       {/* <ScrollView
