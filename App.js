@@ -8,6 +8,7 @@
 import Entype from 'react-native-vector-icons/Entypo';
 import React from 'react';
 import type {Node} from 'react';
+import 'react-native-gesture-handler';
 import { withAuthenticator } from 'aws-amplify-react-native';
 
 
@@ -36,8 +37,7 @@ import SearchResultScreen from './src/screens/SearchResults/index.js';
 import DestinationSearch from './src/screens/DestinationSearch/index.js';
 import Guests from './src/screens/Guests/index.js';
 
-
-
+import Router from './src/navigation/Router.js';
 
 const App: () => Node = () => {
   const isDarkMode = useColorScheme() === 'dark';
@@ -49,42 +49,15 @@ const App: () => Node = () => {
   return (
     <>
     <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-    <SafeAreaView style={backgroundStyle}>
-      {/* <Posts /> */}
-      {/* <HomeScreen /> */}
-      {/* <Profile /> */}
-      {/* <SearchResultScreen /> */}
-      {/* <DestinationSearch /> */}
+      <Router />
+    {/* <SafeAreaView style={backgroundStyle}>
+      <Posts />
+      <HomeScreen />
+      <Profile /> 
+      <SearchResultScreen /> 
+      <DestinationSearch />
       <Guests />
-
-
-
-      {/* <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            <Entype name={"home"} size={24} />
-            Edit <Text style={styles.highlight}>App.js</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>  */}
-    </SafeAreaView>
+    </SafeAreaView> */}
     </>
   );
 };
