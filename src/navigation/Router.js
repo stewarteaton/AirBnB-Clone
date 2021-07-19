@@ -1,9 +1,11 @@
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
-import { NavigationContainer } from 'react-native/native';
-import { createStackNavigator } from 'react-navigation/stack';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import HomeTabNavigator from './HomeTabNavigator';
 //
 import DestinationSearchScreen from '../screens/DestinationSearch/index.js';
+import Guests from '../screens/Guests';
 
 const Stack = createStackNavigator();
 
@@ -11,9 +13,31 @@ const Router = () => {
     return (
         <NavigationContainer>
             <Stack.Navigator>
-                <Stack.Screen name="Destination Search" component={DestinationSearchScreen} />
+                <Stack.Screen 
+                    name={"Home"} 
+                    component={HomeTabNavigator} 
+                    options={{ title: 'Search your destination' }}
+                />
+                {/* Destination Search */}
+                <Stack.Screen 
+                    name="Destination Search" 
+                    component={DestinationSearchScreen} 
+                    options={{ title: 'Search your destination' }}
+                />
+
+                {/* Guests  */}
+                <Stack.Screen 
+                    name="Guests" 
+                    component={Guests} 
+                    options={{ title: 'How many people?' }}
+                />
             </Stack.Navigator>
         </NavigationContainer>
+        //     <NavigationContainer>
+        //     <Stack.Navigator>
+        //       <Stack.Screen name="Home" component={DestinationSearchScreen} />
+        //     </Stack.Navigator>
+        //   </NavigationContainer>
     )
 }
 
