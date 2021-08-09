@@ -1,10 +1,13 @@
 import React, {useState} from 'react'
 import { View, Text, StyleSheet, Pressable } from 'react-native'
+import {useNavigation} from '@react-navigation/native';
 
 const GuestsScreen = (props) => {
     const [adults, setAdults] = useState(0);
     const [children, setChildren] = useState(0);
     const [infants, setInfants] = useState(0);
+
+    const navigation = useNavigation();
 
     return (
         <View style={{justifyContent: 'space-between', height: '100%'}}>
@@ -58,8 +61,19 @@ const GuestsScreen = (props) => {
                     </View>
                 </View>
             </View>
-
-            <Pressable style={styles.searchButton}>
+            
+            {/* Search Button */}
+            <Pressable 
+                onPress={() => {
+                    navigation.navigate('Home', {
+                        screen: 'Explore',
+                        params: {
+                            screen: 'SearchResults',
+                        }
+                    })
+                }}
+                style={styles.searchButton}
+            >
                 <Text style={styles.searchText}>Search</Text>
             </Pressable>
 

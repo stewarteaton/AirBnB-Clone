@@ -16,7 +16,9 @@ const Router = () => {
                 <Stack.Screen 
                     name={"Home"} 
                     component={HomeTabNavigator} 
-                    options={{ title: 'Search your destination' }}
+                    options={{    
+                        headerShown: false,
+                    }}
                 />
                 {/* Destination Search */}
                 <Stack.Screen 

@@ -11,12 +11,13 @@ export default function HomeScreen() {
     const navigation = useNavigation();
 
     return (
-        <View>
+        <View style={{}}>
             {/* Search Bar */}
                 <Pressable style={styles.searchButton} onPress={() => navigation.navigate('Destination Search')}>
                     <Fontisto name="search" size={25} color="red"/>
                     <Text style={styles.searchButtonText}>Where are you going?</Text>
                 </Pressable>
+            
             <ImageBackground source={require('../../images/wallpaper.jpg')} style={styles.image} >
                 {/* Title */}
                 <Text style={styles.title}>AirBnb App</Text>
@@ -65,6 +66,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         position: 'absolute',
         zIndex: 1,
+        marginTop: '10%',
     },
     buttonText: {
         fontWeight: 'bold',

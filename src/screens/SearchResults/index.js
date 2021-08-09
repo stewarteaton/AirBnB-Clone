@@ -33,7 +33,7 @@ const SearchResultScreen = (props) => {
                 >
 
             </FlatList>
-            <Text>Search Results</Text>
+            {/* <Text>Search Results</Text> */}
         </View>
     )
 }
