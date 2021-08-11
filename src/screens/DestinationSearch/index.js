@@ -30,7 +30,6 @@ export default function DestinationSearchScreen() {
                 
                 query={{
                     key: config.GOOG_AUTO_COMPLETE,
-                    // key: 'AIzaSyCm-hludg2r2JEilVopp1MBZLP81FfcV7E',
                     types: '(cities)',
                     language: 'en',
                 }}                
