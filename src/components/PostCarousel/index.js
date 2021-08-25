@@ -43,10 +43,18 @@ export default Post
 
 const styles = StyleSheet.create({
     container: {
-        // bottom: '100%',
-        bottom: 70,
-        height: 100,
+        height: 120,
         padding: 7,
+        // Shadow generator from google
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 4,
+        },
+        shadowOpacity: 0.30,
+        shadowRadius: 4.65,
+
+        elevation: 8,
     },
     innerContainer: {
         flexDirection: 'row',
@@ -70,11 +78,10 @@ const styles = StyleSheet.create({
         color: '#5b5b5b',
     },
     description: {
-        fontSize: 16,
-        lineHeight: 26,
+        fontSize: 15,
     },
     prices: {
-        fontSize: 16,
+        fontSize: 15,
         marginVertical: 10,
     },
     oldPrice: {

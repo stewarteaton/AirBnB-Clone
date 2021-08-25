@@ -1,15 +1,18 @@
 
 import React, { useEffect, useState} from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View, FlatList} from 'react-native'
 import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 import CustomMarker from '../../components/CustomMarker';
 import PostCarouselItem from '../../components/PostCarousel';
 
 import places from '../../../assets/feed';
+import useWindowDimensions from 'react-native/Libraries/Utilities/useWindowDimensions';
 
 const SearchResultsMap = () => {
 
     const [selectedPlaceId, setSelectedPlaceId] = useState(null);
+    const width = useWindowDimensions().width;
+
     // Hooks
     // const [posts, setPosts] = useState([]);
 
@@ -35,11 +38,18 @@ const SearchResultsMap = () => {
                         newPrice={post.newPrice} 
                     />
                 ))}
-
             </MapView>
-            <View style={{position: 'absolute', bottom: 0}}>
-                    <PostCarouselItem post={places[0]} />
-                </View>
+
+            <View style={{position: 'absolute', bottom: 40}}>
+                <FlatList 
+                    data={places}
+                    renderItem={({item}) => <PostCarouselItem post={item} />}
+                    horizontal
+                    snapToInterval={width - 60}
+                    snapToAlignment={'center'}
+                    decelerationRate={'fast'}
+                />
+            </View>
         </View>
     )
 }
