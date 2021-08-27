@@ -16,7 +16,8 @@ const SearchResultScreen = (props) => {
                     graphqlOperation(listPosts)
                 );
                 // check in browser
-                console.log(postsResult);
+                // fetch is running every second, need to fix this to reduce AWS costs
+                // console.log(postsResult);
                 // set state
                 setPosts(postsResult.data.listPosts.items);
             } catch (error) {
