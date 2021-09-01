@@ -4,13 +4,19 @@ import { StyleSheet, Text, View, FlatList} from 'react-native'
 import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 import CustomMarker from '../../components/CustomMarker';
 import PostCarouselItem from '../../components/PostCarousel';
+// API 
+import { API, graphqlOperation } from 'aws-amplify';
+import { listPosts } from '../../graphql/queries'
 
-import places from '../../../assets/feed';
+// import places from '../../../assets/feed';
 import useWindowDimensions from 'react-native/Libraries/Utilities/useWindowDimensions';
 
 const SearchResultsMap = (props) => {
-
+    // Hooks
+    const [posts, setPosts] = useState([])
     const [selectedPlaceId, setSelectedPlaceId] = useState(null);
+    const { guests } = props;
+
     const flatlist = useRef();
     const map = useRef();
 
@@ -27,19 +33,41 @@ const SearchResultsMap = (props) => {
     })
     const width = useWindowDimensions().width;
 
+    // useEffect to fetch data from API and confirm it mounts
+    useEffect(() => {
+        const fetchPosts = async () => {
+            try {
+                const postsResult = await API.graphql(
+                    graphqlOperation(listPosts, {
+                        filter: {
+                            maxGuests: {
+                                ge: guests
+                            }
+                        }
+                    })
+                );
+                // set state
+                setPosts(postsResult.data.listPosts.items);
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        fetchPosts();
+    }, [])
+
     useEffect(() => {
         // before first is selected, we return to avoid error
         if (!selectedPlaceId || !flatlist) { return }
 
         // finds index where place.id matches selected place
-        const index = places.findIndex(place => place.id === selectedPlaceId);
+        const index = posts.findIndex(place => place.id === selectedPlaceId);
         flatlist.current.scrollToIndex({index})
         // console.warn("scroll to " + selectedPlaceId)
 
-        const selectedPlace = places[index];
+        const selectedPlace = posts[index];
         const region = {
-            latitude: selectedPlace.coordinate.latitude,
-            longitude: selectedPlace.coordinate.longitude,
+            latitude: selectedPlace.latitude,
+            longitude: selectedPlace.longitude,
             // For amount zoomed
             latitudeDelta: .8,
             longitudeDelta: .8,
@@ -62,13 +90,13 @@ const SearchResultsMap = (props) => {
                 longitudeDelta: 0.8,
                 }}
             >
-                {places.map(post => (
+                {posts.map(post => (
                     <CustomMarker 
                         isSelected={post.id === selectedPlaceId}
                         onPress={() => {
                             setSelectedPlaceId(post.id)
                         }}
-                        coordinate={post.coordinate} 
+                        coordinate={{latitude: post.latitude, longitude: post.longitude }}
                         newPrice={post.newPrice} 
                     />
                 ))}
@@ -77,7 +105,7 @@ const SearchResultsMap = (props) => {
             <View style={{position: 'absolute', bottom: 40}}>
                 <FlatList 
                     ref={flatlist}
-                    data={places}
+                    data={posts}
                     renderItem={({item}) => <PostCarouselItem post={item} />}
                     horizontal
                     snapToInterval={width - 60}
