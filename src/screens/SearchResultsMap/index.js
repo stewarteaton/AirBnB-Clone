@@ -4,18 +4,14 @@ import { StyleSheet, Text, View, FlatList} from 'react-native'
 import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 import CustomMarker from '../../components/CustomMarker';
 import PostCarouselItem from '../../components/PostCarousel';
-// API 
-import { API, graphqlOperation } from 'aws-amplify';
-import { listPosts } from '../../graphql/queries'
 
 // import places from '../../../assets/feed';
 import useWindowDimensions from 'react-native/Libraries/Utilities/useWindowDimensions';
 
 const SearchResultsMap = (props) => {
     // Hooks
-    const [posts, setPosts] = useState([])
     const [selectedPlaceId, setSelectedPlaceId] = useState(null);
-    const { guests } = props;
+    const { posts } = props;
 
     const flatlist = useRef();
     const map = useRef();
@@ -33,28 +29,7 @@ const SearchResultsMap = (props) => {
     })
     const width = useWindowDimensions().width;
 
-    // useEffect to fetch data from API and confirm it mounts
-    useEffect(() => {
-        const fetchPosts = async () => {
-            try {
-                const postsResult = await API.graphql(
-                    graphqlOperation(listPosts, {
-                        filter: {
-                            maxGuests: {
-                                ge: guests
-                            }
-                        }
-                    })
-                );
-                // set state
-                setPosts(postsResult.data.listPosts.items);
-            } catch (error) {
-                console.log(error);
-            }
-        }
-        fetchPosts();
-    }, [])
-
+    // Scroll to selected place on map
     useEffect(() => {
         // before first is selected, we return to avoid error
         if (!selectedPlaceId || !flatlist) { return }

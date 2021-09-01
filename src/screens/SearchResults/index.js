@@ -1,37 +1,13 @@
 import React, { useEffect, useState} from 'react'
 import { View, Text, FlatList} from 'react-native';
 import Post from '../../components/posts';
-import { API, graphqlOperation } from 'aws-amplify';
-import { listPosts } from '../../graphql/queries';
+
 
 // export default function index() {
 const SearchResultScreen = (props) => {
-    // Hooks
-    const [posts, setPosts] = useState([])
-    const { guests } = props;
-    console.log('Props: ' + guests);
 
-    // useEffect to fetch data from API and confirm it mounts
-    useEffect(() => {
-        const fetchPosts = async () => {
-            try {
-                const postsResult = await API.graphql(
-                    graphqlOperation(listPosts, {
-                        filter: {
-                            maxGuests: {
-                                ge: guests
-                            }
-                        }
-                    })
-                );
-                // set state
-                setPosts(postsResult.data.listPosts.items);
-            } catch (error) {
-                console.log(error);
-            }
-        }
-        fetchPosts();
-    }, [])
+    const { posts } = props;
+    console.log(posts);
 
     return (
         <View>

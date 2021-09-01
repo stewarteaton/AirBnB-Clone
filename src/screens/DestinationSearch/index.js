@@ -22,8 +22,9 @@ export default function DestinationSearchScreen() {
                 placeholder='Where are you going?'
                 onPress={(data, details = null) => {
                     // 'details' is provided when fetchDetails = true
-                    navigation.navigate('Guests');
-                    console.log(data, details);
+                    console.log(data ,details)
+                    // pass lat/long corners for location results
+                    navigation.navigate('Guests', {viewport: details.geometry.viewport} );
                 }}
                 // Gets data like lat/long etc.
                 fetchDetails

@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import { View, Text, StyleSheet, Pressable } from 'react-native'
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation, useRoute} from '@react-navigation/native';
 
 const GuestsScreen = (props) => {
     const [adults, setAdults] = useState(0);
@@ -8,6 +8,7 @@ const GuestsScreen = (props) => {
     const [infants, setInfants] = useState(0);
 
     const navigation = useNavigation();
+    const route = useRoute();
 
     return (
         <View style={{justifyContent: 'space-between', height: '100%'}}>
@@ -71,6 +72,7 @@ const GuestsScreen = (props) => {
                             screen: 'SearchResults',
                             params: {
                                 guests:  adults + children,
+                                viewport: route.params.viewport,
                             }
                         }
                     })
