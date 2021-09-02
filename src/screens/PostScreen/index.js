@@ -10,8 +10,7 @@ const PostScreen = () => {
     const route = useRoute();
     console.log('Route Params' + route.params.postId)
 
-    const post = places.find(place => place.id === route.params.postId);
-    console.log(post)
+    const post = route.params.postId
 
     return (
         <View style={styles.container}>
